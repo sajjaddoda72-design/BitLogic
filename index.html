@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CryptoSim Engine | Bitcoin Trading Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "inverse-surface": "#faf8ff",
+                "inverse-primary": "#8d5000",
+                "tertiary": "#ff7162",
+                "secondary-fixed-dim": "#00ef99",
+                "on-primary-fixed-variant": "#582f00",
+                "surface": "#0c0e17",
+                "primary-fixed-dim": "#ed8b0e",
+                "tertiary-dim": "#e2241f",
+                "on-surface-variant": "#aaaab7",
+                "outline-variant": "#464752",
+                "on-background": "#f0f0fd",
+                "on-secondary-fixed-variant": "#00673f",
+                "on-secondary": "#005c38",
+                "secondary-fixed": "#00ffa3",
+                "surface-container-low": "#11131d",
+                "secondary-dim": "#00ef99",
+                "surface-container-lowest": "#000000",
+                "on-surface": "#f0f0fd",
+                "secondary-container": "#006d43",
+                "error-container": "#b92902",
+                "on-tertiary": "#4a0001",
+                "primary-container": "#ea8908",
+                "primary-dim": "#ed8b0e",
+                "on-primary": "#4b2800",
+                "on-tertiary-fixed": "#3a0001",
+                "on-primary-container": "#371c00",
+                "secondary": "#00ffa3",
+                "on-primary-fixed": "#281300",
+                "surface-variant": "#222532",
+                "surface-container-high": "#1c1f2b",
+                "surface-bright": "#282b3a",
+                "on-secondary-container": "#e2ffe9",
+                "on-tertiary-fixed-variant": "#7a0004",
+                "surface-dim": "#0c0e17",
+                "background": "#0c0e17",
+                "outline": "#737580",
+                "tertiary-fixed-dim": "#ff7c6c",
+                "surface-container-highest": "#222532",
+                "on-error-container": "#ffd2c8",
+                "error": "#ff7351",
+                "surface-container": "#171924",
+                "on-secondary-fixed": "#00472a",
+                "on-tertiary-container": "#000000",
+                "on-error": "#450900",
+                "error-dim": "#d53d18",
+                "primary-fixed": "#fe9821",
+                "primary": "#fe9821",
+                "tertiary-fixed": "#ff9385",
+                "inverse-on-surface": "#53545f",
+                "tertiary-container": "#f9362c",
+                "surface-tint": "#fe9821"
+              },
+              fontFamily: {
+                "headline": ["Manrope"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+            },
+          },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(34, 37, 50, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(115, 117, 128, 0.15);
+        }
+        .chart-gradient {
+            background: linear-gradient(to bottom, rgba(0, 255, 163, 0.1), transparent);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0c0e17;
+            color: #f0f0fd;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full flex justify-between items-center px-6 h-16 bg-[#171924]/80 backdrop-blur-xl z-50 shadow-2xl shadow-black/50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#F7931A] text-2xl" data-icon="monitoring">monitoring</span>
+<div class="flex flex-col">
+<h1 class="font-['Manrope'] font-bold text-xl tracking-tight text-[#F7931A]">CryptoSim Engine</h1>
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="text-[10px] uppercase tracking-widest text-secondary font-medium">Back-end Linked</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-xl hover:bg-[#222532] transition-colors duration-300 active:scale-95">
+<span class="material-symbols-outlined text-[#464752]" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 rounded-xl hover:bg-[#222532] transition-colors duration-300 active:scale-95">
+<span class="material-symbols-outlined text-[#464752]" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+<div class="absolute bottom-0 left-0 w-full bg-gradient-to-b from-[#464752]/20 to-transparent h-[1px]"></div>
+</header>
+<main class="pt-24 px-6 max-w-7xl mx-auto space-y-8">
+<!-- Top Stats Row (Mobile-friendly Bento) -->
+<section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="glass-card p-5 rounded-2xl flex flex-col justify-between h-32 relative overflow-hidden">
+<span class="text-on-surface-variant text-xs font-medium uppercase tracking-wider">Current Price</span>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-headline font-bold">$65,400</span>
+<div class="flex items-center text-secondary text-[10px] bg-secondary/10 px-1.5 py-0.5 rounded-md shadow-[0_0_10px_rgba(0,255,163,0.2)]">
+<span class="material-symbols-outlined text-xs" data-icon="arrow_upward">arrow_upward</span>
+                        2.4%
+                    </div>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-6xl" data-icon="currency_bitcoin">currency_bitcoin</span>
+</div>
+</div>
+<div class="glass-card p-5 rounded-2xl flex flex-col justify-between h-32">
+<span class="text-on-surface-variant text-xs font-medium uppercase tracking-wider">Portfolio Value</span>
+<span class="text-2xl font-headline font-bold text-primary">$120,500</span>
+<div class="h-1 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4"></div>
+</div>
+</div>
+<div class="glass-card p-5 rounded-2xl flex flex-col justify-between h-32">
+<span class="text-on-surface-variant text-xs font-medium uppercase tracking-wider">ROI</span>
+<span class="text-2xl font-headline font-bold text-secondary">+18.5%</span>
+<span class="text-[10px] text-on-surface-variant italic">Since inception</span>
+</div>
+<div class="glass-card p-5 rounded-2xl flex flex-col justify-between h-32">
+<span class="text-on-surface-variant text-xs font-medium uppercase tracking-wider">Holdings</span>
+<span class="text-2xl font-headline font-bold">1.84 BTC</span>
+<span class="text-[10px] text-on-surface-variant">≈ $120,336.00</span>
+</div>
+</section>
+<!-- Main Content Area: Chart & Action Panel -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Main Chart Area -->
+<div class="lg:col-span-8 glass-card rounded-3xl p-8 min-h-[450px] flex flex-col">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h3 class="font-headline font-bold text-xl tracking-tight">Market Intelligence</h3>
+<p class="text-on-surface-variant text-xs">BTC/USD Simulator Output (SMA Analysis)</p>
+</div>
+<div class="flex gap-2">
+<span class="flex items-center gap-1.5 text-[10px] font-medium text-secondary">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Price
+                        </span>
+<span class="flex items-center gap-1.5 text-[10px] font-medium text-primary">
+<span class="w-2 h-2 rounded-full bg-primary"></span> SMA7
+                        </span>
+<span class="flex items-center gap-1.5 text-[10px] font-medium text-tertiary">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span> SMA30
+                        </span>
+</div>
+</div>
+<!-- Abstract Chart Visualization -->
+<div class="flex-grow relative mt-4 border-l border-b border-outline-variant/20">
+<svg class="w-full h-full" viewbox="0 0 800 300">
+<!-- Background Grid -->
+<line stroke="#464752" stroke-opacity="0.1" x1="0" x2="800" y1="50" y2="50"></line>
+<line stroke="#464752" stroke-opacity="0.1" x1="0" x2="800" y1="100" y2="100"></line>
+<line stroke="#464752" stroke-opacity="0.1" x1="0" x2="800" y1="150" y2="150"></line>
+<line stroke="#464752" stroke-opacity="0.1" x1="0" x2="800" y1="200" y2="200"></line>
+<line stroke="#464752" stroke-opacity="0.1" x1="0" x2="800" y1="250" y2="250"></line>
+<!-- Price Line -->
+<path d="M0,250 L50,230 L100,240 L150,180 L200,160 L250,170 L300,110 L350,130 L400,90 L450,100 L500,60 L550,80 L600,40 L650,55 L700,30 L750,45 L800,20" fill="none" stroke="#00ffa3" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+<!-- Area under price -->
+<path d="M0,250 L50,230 L100,240 L150,180 L200,160 L250,170 L300,110 L350,130 L400,90 L450,100 L500,60 L550,80 L600,40 L650,55 L700,30 L750,45 L800,20 V300 H0 Z" fill="url(#chart-gradient)" opacity="0.4"></path>
+<!-- SMA7 (Fast) -->
+<path d="M0,260 L100,245 L200,180 L300,140 L400,110 L500,90 L600,60 L700,50 L800,35" fill="none" stroke="#fe9821" stroke-dasharray="4" stroke-width="2"></path>
+<!-- SMA30 (Slow) -->
+<path d="M0,280 L200,240 L400,180 L600,140 L800,100" fill="none" stroke="#ff7162" stroke-width="2"></path>
+<!-- Golden Cross Indicator -->
+<circle class="animate-pulse" cx="210" cy="180" fill="#00ffa3" r="6"></circle>
+<text fill="#00ffa3" font-size="10" font-weight="bold" x="220" y="175">GOLDEN CROSS</text>
+<defs>
+<lineargradient id="chart-gradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#00ffa3;stop-opacity:0.2"></stop>
+<stop offset="100%" style="stop-color:#00ffa3;stop-opacity:0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+<div class="flex justify-between mt-6 pt-6 border-t border-outline-variant/10">
+<span class="text-[10px] text-on-surface-variant font-mono">00:00 UTC</span>
+<span class="text-[10px] text-on-surface-variant font-mono">06:00 UTC</span>
+<span class="text-[10px] text-on-surface-variant font-mono">12:00 UTC</span>
+<span class="text-[10px] text-on-surface-variant font-mono">18:00 UTC</span>
+<span class="text-[10px] text-on-surface-variant font-mono">NOW</span>
+</div>
+</div>
+<!-- Action Panel -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<div class="glass-card rounded-3xl p-6 flex flex-col gap-6">
+<h3 class="font-headline font-bold text-lg tracking-tight">Engine Controls</h3>
+<div class="space-y-4">
+<div class="space-y-2">
+<label class="text-[11px] uppercase tracking-widest text-on-surface-variant font-semibold">Initial Balance ($)</label>
+<input class="w-full bg-surface-container-high border-0 rounded-xl focus:ring-1 focus:ring-primary text-on-surface px-4 py-3 font-mono" type="text" value="50,000"/>
+</div>
+<div class="space-y-2">
+<label class="text-[11px] uppercase tracking-widest text-on-surface-variant font-semibold">Volatility (%)</label>
+<div class="flex items-center gap-4">
+<input class="flex-grow accent-primary" type="range"/>
+<span class="font-mono text-sm text-primary">12%</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-[11px] uppercase tracking-widest text-on-surface-variant font-semibold">Simulation Days</label>
+<div class="grid grid-cols-3 gap-2">
+<button class="bg-surface-container-highest rounded-lg py-2 text-xs font-medium hover:bg-primary/20 transition-colors">30D</button>
+<button class="bg-primary/10 border border-primary/30 rounded-lg py-2 text-xs font-medium text-primary">90D</button>
+<button class="bg-surface-container-highest rounded-lg py-2 text-xs font-medium hover:bg-primary/20 transition-colors">365D</button>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary font-bold py-4 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 shadow-xl shadow-primary/20">
+<span class="material-symbols-outlined" data-icon="play_arrow">play_arrow</span>
+                        Run Simulation
+                    </button>
+</div>
+<div class="glass-card rounded-3xl p-6 bg-secondary/5 border-secondary/20">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="auto_awesome">auto_awesome</span>
+<div>
+<p class="text-xs font-bold text-secondary">AI Prediction</p>
+<p class="text-[11px] text-on-surface-variant mt-1 leading-relaxed">SMA crossover suggests a massive bullish momentum. Simulator projecting +4.2% in next 12 hours.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trading Ledger Table -->
+<section class="glass-card rounded-3xl overflow-hidden mb-12">
+<div class="p-6 border-b border-outline-variant/10 flex justify-between items-center">
+<h3 class="font-headline font-bold text-lg">Trading Ledger</h3>
+<button class="text-xs text-primary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span> Export CSV
+                </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low/50">
+<tr>
+<th class="px-6 py-4 text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Date</th>
+<th class="px-6 py-4 text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Price</th>
+<th class="px-6 py-4 text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Signal</th>
+<th class="px-6 py-4 text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Balance</th>
+<th class="px-6 py-4 text-[10px] uppercase tracking-widest text-on-surface-variant font-bold text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<tr class="hover:bg-surface-variant/20 transition-colors">
+<td class="px-6 py-4 text-sm font-mono text-on-surface-variant">2023-11-20 14:00</td>
+<td class="px-6 py-4 text-sm font-bold">$64,210.00</td>
+<td class="px-6 py-4">
+<span class="bg-secondary/10 text-secondary text-[10px] font-bold px-2.5 py-1 rounded-full border border-secondary/20">BUY</span>
+</td>
+<td class="px-6 py-4 text-sm font-mono">$120,500.00</td>
+<td class="px-6 py-4 text-right">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-on-surface" data-icon="more_horiz">more_horiz</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant/20 transition-colors">
+<td class="px-6 py-4 text-sm font-mono text-on-surface-variant">2023-11-20 12:00</td>
+<td class="px-6 py-4 text-sm font-bold">$66,800.00</td>
+<td class="px-6 py-4">
+<span class="bg-error/10 text-error text-[10px] font-bold px-2.5 py-1 rounded-full border border-error/20">SELL</span>
+</td>
+<td class="px-6 py-4 text-sm font-mono">$118,200.00</td>
+<td class="px-6 py-4 text-right">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-on-surface" data-icon="more_horiz">more_horiz</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant/20 transition-colors">
+<td class="px-6 py-4 text-sm font-mono text-on-surface-variant">2023-11-20 10:00</td>
+<td class="px-6 py-4 text-sm font-bold">$65,100.00</td>
+<td class="px-6 py-4">
+<span class="bg-surface-container-highest text-on-surface-variant text-[10px] font-bold px-2.5 py-1 rounded-full">HOLD</span>
+</td>
+<td class="px-6 py-4 text-sm font-mono">$102,400.00</td>
+<td class="px-6 py-4 text-right">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-on-surface" data-icon="more_horiz">more_horiz</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant/20 transition-colors">
+<td class="px-6 py-4 text-sm font-mono text-on-surface-variant">2023-11-20 08:00</td>
+<td class="px-6 py-4 text-sm font-bold">$62,900.00</td>
+<td class="px-6 py-4">
+<span class="bg-secondary/10 text-secondary text-[10px] font-bold px-2.5 py-1 rounded-full border border-secondary/20">BUY</span>
+</td>
+<td class="px-6 py-4 text-sm font-mono">$102,400.00</td>
+<td class="px-6 py-4 text-right">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-on-surface" data-icon="more_horiz">more_horiz</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#171924]/90 backdrop-blur-2xl rounded-t-3xl border-t border-[#464752]/15 shadow-[0_-12px_40px_-12px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-[#464752] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="show_chart">show_chart</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Market</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#464752] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Portfolio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#F7931A] bg-[#F7931A]/10 rounded-xl px-4 py-1 scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="play_circle">play_circle</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Simulate</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#464752] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="list_alt">list_alt</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest mt-1">Ledger</span>
+</a>
+</nav>
+<!-- Background Decorative Elements -->
+<div class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none opacity-20">
+<div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-secondary/20 rounded-full blur-[100px]"></div>
+</div>
+</body></html>
