@@ -1,0 +1,9 @@
+[build]
+  # No build command needed - this is a static site
+  publish = "."
+
+# SPA-style redirect: serve index.html for all routes
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
