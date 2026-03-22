@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed-dim": "#ffb874",
+              "on-secondary-container": "#b7b5b4",
+              "surface-bright": "#39393b",
+              "surface-variant": "#353437",
+              "surface-container-high": "#2a2a2c",
+              "on-surface-variant": "#dbc2ae",
+              "surface-dim": "#131315",
+              "on-tertiary-fixed-variant": "#673d00",
+              "outline": "#a38d7b",
+              "background": "#131315",
+              "on-primary-container": "#603500",
+              "tertiary": "#ffb967",
+              "inverse-surface": "#e5e1e4",
+              "inverse-primary": "#8c4f00",
+              "on-primary-fixed": "#2d1600",
+              "secondary": "#c8c6c5",
+              "secondary-fixed-dim": "#c8c6c5",
+              "on-primary-fixed-variant": "#6b3b00",
+              "surface": "#131315",
+              "surface-container-low": "#1b1b1d",
+              "tertiary-fixed-dim": "#ffb866",
+              "error": "#ffb4ab",
+              "on-error-container": "#ffdad6",
+              "surface-container-highest": "#353437",
+              "surface-container": "#201f21",
+              "surface-container-lowest": "#0e0e10",
+              "on-secondary-fixed": "#1b1c1c",
+              "outline-variant": "#554335",
+              "on-background": "#e5e1e4",
+              "on-secondary-fixed-variant": "#474746",
+              "secondary-fixed": "#e5e2e1",
+              "on-secondary": "#303030",
+              "primary-container": "#f7931a",
+              "on-tertiary": "#482900",
+              "error-container": "#93000a",
+              "on-error": "#690005",
+              "on-tertiary-container": "#5d3700",
+              "on-surface": "#e5e1e4",
+              "secondary-container": "#474746",
+              "inverse-on-surface": "#313032",
+              "primary": "#ffb874",
+              "tertiary-fixed": "#ffddba",
+              "surface-tint": "#ffb874",
+              "tertiary-container": "#ea9a2f",
+              "on-primary": "#4b2800",
+              "on-tertiary-fixed": "#2b1700",
+              "primary-fixed": "#ffdcbf"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(53, 52, 55, 0.4);
+            backdrop-filter: blur(20px);
+            box-shadow: inset 0 1px 1px rgba(247, 147, 26, 0.15);
+        }
+        .active-glow {
+            box-shadow: 0 0 12px rgba(247, 147, 26, 0.3);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #2a2a2c;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container/30">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-zinc-950/40 backdrop-blur-xl border-b border-[#F7931A]/10 shadow-[0_1px_15px_-3px_rgba(247,147,26,0.15)]">
+<div class="flex justify-between items-center h-16 px-6 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#F7931A] text-2xl cursor-pointer hover:bg-zinc-800/50 transition-colors p-2 rounded-full active:scale-95 transition-transform duration-300">grid_view</span>
+<h1 class="text-xl font-black text-[#F7931A] tracking-tighter font-headline">CryptoSim</h1>
+</div>
+<div class="flex items-center gap-2">
+<div class="h-2 w-2 rounded-full bg-primary-container animate-pulse mr-1"></div>
+<span class="material-symbols-outlined text-zinc-100 cursor-pointer hover:bg-zinc-800/50 p-2 rounded-full">sensors</span>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-4 max-w-lg mx-auto space-y-8">
+<!-- Header Section -->
+<section class="space-y-1">
+<h2 class="text-3xl font-extrabold tracking-tight text-on-surface font-headline">Simulate Engine</h2>
+<p class="text-on-surface-variant body-md">Backtest high-frequency strategies with precision.</p>
+</section>
+<!-- Main Simulation Config Card -->
+<div class="glass-card rounded-[2rem] p-6 space-y-8">
+<!-- Asset Selection -->
+<div class="space-y-4">
+<label class="label-md text-xs font-semibold uppercase tracking-[0.1em] text-on-surface-variant">Active Trading Pair</label>
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-2xl border-b border-outline-variant/10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#F7931A]" style="font-variation-settings: 'FILL' 1;">currency_bitcoin</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">BTC / USDT</p>
+<p class="text-xs text-on-surface-variant">Binance Spot</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-zinc-500">expand_more</span>
+</div>
+</div>
+<!-- Simulation Days Toggle -->
+<div class="space-y-4">
+<label class="label-md text-xs font-semibold uppercase tracking-[0.1em] text-on-surface-variant">Lookback Period</label>
+<div class="flex gap-3">
+<button class="flex-1 py-3 px-4 rounded-xl font-bold transition-all duration-300 bg-surface-container-lowest text-zinc-500 active:scale-95">30D</button>
+<button class="flex-1 py-3 px-4 rounded-xl font-bold transition-all duration-300 bg-primary-container/20 text-[#F7931A] active-glow border border-[#F7931A]/20 scale-[0.98] shadow-inner">90D</button>
+<button class="flex-1 py-3 px-4 rounded-xl font-bold transition-all duration-300 bg-surface-container-lowest text-zinc-500 active:scale-95">365D</button>
+</div>
+</div>
+<!-- Kinetic Slider Section -->
+<div class="space-y-6">
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<label class="label-md text-xs font-semibold uppercase tracking-[0.1em] text-on-surface-variant">Leverage Multiplier</label>
+<span class="text-[#F7931A] font-black tracking-tighter">10.0x</span>
+</div>
+<div class="relative h-12 flex items-center">
+<div class="absolute w-full h-1 bg-surface-container-low rounded-full"></div>
+<div class="absolute w-[40%] h-1 bg-primary-container rounded-full shadow-[0_0_8px_rgba(247,147,26,0.4)]"></div>
+<div class="absolute left-[40%] -ml-3 w-6 h-6 bg-white rounded-full border-4 border-primary-container shadow-xl"></div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<label class="label-md text-xs font-semibold uppercase tracking-[0.1em] text-on-surface-variant">Risk Variance</label>
+<span class="text-[#F7931A] font-black tracking-tighter">Medium High</span>
+</div>
+<div class="relative h-12 flex items-center">
+<div class="absolute w-full h-1 bg-surface-container-low rounded-full"></div>
+<div class="absolute w-[65%] h-1 bg-primary-container rounded-full shadow-[0_0_8px_rgba(247,147,26,0.4)]"></div>
+<div class="absolute left-[65%] -ml-3 w-6 h-6 bg-white rounded-full border-4 border-primary-container shadow-xl"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Real-time Chart Hint -->
+<div class="glass-card rounded-[2rem] p-6 overflow-hidden relative min-h-[160px] flex flex-col justify-end">
+<div class="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
+<img class="w-full h-full object-cover grayscale" data-alt="Abstract golden glowing financial line chart visualization" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAtJ98C84qxgSLOKuIAKj_VYCSEVNuJ-oCuJ-m5DRLw_I_I4aLHKuLvaopAusuflPFQUX2hhOXfTAZjGXMk-Qvoqvai-rQ3wmjnBsLKKd_VhTF1RzMVogPafEzaxrRZEZIR2JiN25zIOuu8oBLPDIKULrKVb4q0xGw1dwb16qKHTpG3wKVc8IL47dNsBP4G0xIcDB6H63cFF2iG5S3YNMhDL-AQwZcpHXmlcuyzgygp6uDLd4M6UQZswOixEAx5xDdEtneu1xMUmk"/>
+</div>
+<div class="absolute top-4 right-4 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-[#F7931A] animate-ping"></div>
+<span class="text-[10px] font-bold text-[#F7931A] uppercase tracking-widest">Live Flow</span>
+</div>
+<div class="relative z-10">
+<p class="text-xs text-on-surface-variant font-bold uppercase tracking-widest">Expected Yield</p>
+<div class="flex items-baseline gap-2">
+<h3 class="text-4xl font-black text-on-surface tracking-tighter">+12.4%</h3>
+<span class="text-primary text-sm font-bold">↑ 2.1%</span>
+</div>
+</div>
+</div>
+<!-- Ledger Table Section -->
+<div class="space-y-4">
+<div class="flex justify-between items-end">
+<h3 class="headline-lg text-xl font-bold tracking-tight">Signal Ledger</h3>
+<span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">View All</span>
+</div>
+<div class="glass-card rounded-[2rem] overflow-hidden">
+<div class="max-h-64 overflow-y-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 bg-[#2A2A2C]/90 backdrop-blur-md z-20">
+<tr>
+<th class="p-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Action</th>
+<th class="p-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest text-right">Price</th>
+<th class="p-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest text-right">Time</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<tr class="hover:bg-primary-container/5 transition-colors">
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-500 text-[10px] font-black uppercase">Long</span>
+</td>
+<td class="p-4 text-right font-mono text-sm font-bold text-on-surface">$42,890.12</td>
+<td class="p-4 text-right text-xs text-on-surface-variant">14:20:05</td>
+</tr>
+<tr class="hover:bg-primary-container/5 transition-colors bg-surface-container-low/30">
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-error/10 text-error text-[10px] font-black uppercase">Short</span>
+</td>
+<td class="p-4 text-right font-mono text-sm font-bold text-on-surface">$43,105.44</td>
+<td class="p-4 text-right text-xs text-on-surface-variant">14:18:22</td>
+</tr>
+<tr class="hover:bg-primary-container/5 transition-colors">
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-500 text-[10px] font-black uppercase">Long</span>
+</td>
+<td class="p-4 text-right font-mono text-sm font-bold text-on-surface">$42,750.00</td>
+<td class="p-4 text-right text-xs text-on-surface-variant">14:15:10</td>
+</tr>
+<tr class="hover:bg-primary-container/5 transition-colors bg-surface-container-low/30">
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-500 text-[10px] font-black uppercase">Long</span>
+</td>
+<td class="p-4 text-right font-mono text-sm font-bold text-on-surface">$42,620.89</td>
+<td class="p-4 text-right text-xs text-on-surface-variant">14:12:45</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Dynamic Action Button -->
+<button class="w-full py-5 rounded-[2rem] bg-gradient-to-r from-primary-container to-[#ffb874] text-on-primary font-black text-lg tracking-tight shadow-[0_12px_32px_rgba(247,147,26,0.3)] active:scale-95 active:shadow-inner transition-all duration-300 flex items-center justify-center gap-3">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+            Run Simulation
+        </button>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 px-4 pb-2 bg-zinc-900/80 backdrop-blur-2xl rounded-t-3xl border-t border-zinc-800 shadow-[0_-8px_32px_rgba(0,0,0,0.4)]">
+<div class="flex flex-col items-center justify-center text-zinc-500 py-2 px-4 hover:text-zinc-300 active:scale-96 transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined mb-1">monitoring</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-[0.05em]">Market</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-500 py-2 px-4 hover:text-zinc-300 active:scale-96 transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined mb-1">account_balance_wallet</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-[0.05em]">Portfolio</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#F7931A] bg-[#F7931A]/10 rounded-2xl py-2 px-4 shadow-[0_0_20px_rgba(247,147,26,0.2)] scale-105 active:scale-96 transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">memory</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-[0.05em]">Simulate</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-500 py-2 px-4 hover:text-zinc-300 active:scale-96 transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined mb-1">receipt_long</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-[0.05em]">Ledger</span>
+</div>
+</nav>
+</body></html>
