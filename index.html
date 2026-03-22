@@ -3,7 +3,12 @@
 <html class="dark" lang="en" dir="ltr"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>CryptoSim - Bitcoin Trading Simulator</title>
+<title>BitLogic - Bitcoin Trading Simulator</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#131315">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="icons/icon-192.svg">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -137,6 +142,79 @@
   </style>
   </head>
 <body class="bg-surface text-on-surface font-body selection:bg-primary-container/30">
+
+<!-- ═══════════════ ONBOARDING SCREEN ═══════════════ -->
+<div id="onboarding" class="fixed inset-0 z-[60] bg-surface overflow-y-auto transition-all duration-700">
+<div class="min-h-screen flex flex-col items-center justify-center px-6 py-12 max-w-lg mx-auto">
+
+  <!-- Floating crypto icons -->
+  <div class="relative w-full flex justify-center items-center mb-8" style="height:160px;">
+    <!-- BTC icon -->
+    <div class="absolute left-[15%] top-2 animate-bounce" style="animation-duration:3s;">
+      <div class="w-20 h-20 rounded-full bg-[#F7931A]/15 backdrop-blur-md flex items-center justify-center border border-[#F7931A]/20 shadow-[0_0_30px_rgba(247,147,26,0.2)]">
+        <svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#F7931A" opacity="0.2"/><text x="20" y="26" text-anchor="middle" font-family="Arial" font-weight="900" font-size="22" fill="#F7931A">&#x20bf;</text></svg>
+      </div>
+    </div>
+    <!-- USDT icon -->
+    <div class="absolute right-[15%] top-8 animate-bounce" style="animation-duration:3.5s;animation-delay:0.5s;">
+      <div class="w-16 h-16 rounded-full bg-emerald-500/15 backdrop-blur-md flex items-center justify-center border border-emerald-500/20 shadow-[0_0_30px_rgba(16,185,129,0.15)]">
+        <svg width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="#10B981" opacity="0.2"/><text x="16" y="21" text-anchor="middle" font-family="Arial" font-weight="800" font-size="16" fill="#10B981">$</text></svg>
+      </div>
+    </div>
+    <!-- Center glow -->
+    <div class="w-28 h-28 rounded-full bg-[#F7931A]/10 blur-2xl absolute"></div>
+    <!-- Main logo -->
+    <div class="relative z-10 w-24 h-24 rounded-3xl bg-surface-container-lowest border border-[#F7931A]/20 flex items-center justify-center shadow-[0_8px_40px_rgba(247,147,26,0.25)]">
+      <span class="text-4xl font-black text-[#F7931A] font-headline tracking-tighter">B</span>
+    </div>
+  </div>
+
+  <!-- App name -->
+  <h1 class="text-3xl font-black text-[#F7931A] tracking-tighter font-headline mb-2">BitLogic</h1>
+  <p data-i18n="onboard_tagline" class="text-on-surface-variant text-center text-sm mb-8">Smart crypto trading simulator powered by mathematical models</p>
+
+  <!-- Feature cards -->
+  <div class="w-full space-y-3 mb-10">
+    <div class="glass-card rounded-2xl p-4 flex items-start gap-4">
+      <div class="w-10 h-10 rounded-xl bg-[#F7931A]/10 flex items-center justify-center flex-shrink-0">
+        <span class="material-symbols-outlined text-[#F7931A] text-xl" style="font-variation-settings:'FILL' 1;">analytics</span>
+      </div>
+      <div>
+        <h3 data-i18n="onboard_f1_title" class="font-bold text-on-surface text-sm">Advanced Simulation</h3>
+        <p data-i18n="onboard_f1_desc" class="text-on-surface-variant text-xs mt-0.5">Geometric Brownian Motion model with Golden Cross / Death Cross strategy</p>
+      </div>
+    </div>
+    <div class="glass-card rounded-2xl p-4 flex items-start gap-4">
+      <div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+        <span class="material-symbols-outlined text-emerald-500 text-xl" style="font-variation-settings:'FILL' 1;">speed</span>
+      </div>
+      <div>
+        <h3 data-i18n="onboard_f2_title" class="font-bold text-on-surface text-sm">Leverage Up to 50x</h3>
+        <p data-i18n="onboard_f2_desc" class="text-on-surface-variant text-xs mt-0.5">Test high-risk strategies with adjustable leverage multiplier</p>
+      </div>
+    </div>
+    <div class="glass-card rounded-2xl p-4 flex items-start gap-4">
+      <div class="w-10 h-10 rounded-xl bg-[#ffb874]/10 flex items-center justify-center flex-shrink-0">
+        <span class="material-symbols-outlined text-[#ffb874] text-xl" style="font-variation-settings:'FILL' 1;">monitoring</span>
+      </div>
+      <div>
+        <h3 data-i18n="onboard_f3_title" class="font-bold text-on-surface text-sm">Real-time Charts</h3>
+        <p data-i18n="onboard_f3_desc" class="text-on-surface-variant text-xs mt-0.5">Interactive Price vs SMA7 vs SMA30 visualization with signal tracking</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Button -->
+  <button id="onboard-cta" class="w-full py-5 rounded-[2rem] glass-card border border-[#F7931A]/30 text-[#F7931A] font-black text-lg tracking-tight shadow-[0_12px_32px_rgba(247,147,26,0.2)] hover:shadow-[0_12px_40px_rgba(247,147,26,0.35)] active:scale-95 active:shadow-inner transition-all duration-300 flex items-center justify-center gap-3 backdrop-blur-xl">
+    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calculate</span>
+    <span data-i18n="onboard_cta">Calculate Now</span>
+  </button>
+
+  <!-- Subtle hint -->
+  <p class="text-zinc-600 text-[10px] mt-4 uppercase tracking-widest font-semibold">BTC &bull; USDT</p>
+</div>
+</div>
+
 <!-- TopAppBar -->
 <header class="fixed top-0 w-full z-50 bg-zinc-950/40 backdrop-blur-xl border-b border-[#F7931A]/10 shadow-[0_1px_15px_-3px_rgba(247,147,26,0.15)]">
 <div class="flex justify-between items-center h-16 px-6 w-full">
@@ -155,28 +233,83 @@
 </div>
 </div>
 </header>
-<main class="pt-24 pb-32 px-4 max-w-lg mx-auto space-y-8">
-<!-- Header Section -->
+<!-- ═══════════════ PAGE: MARKET ═══════════════ -->
+<div id="page-market" class="hidden pt-24 pb-32 px-4 max-w-lg mx-auto space-y-6">
+<section class="space-y-1">
+<h2 data-i18n="market_title" class="text-3xl font-extrabold tracking-tight text-on-surface font-headline">Market</h2>
+<p data-i18n="market_subtitle" class="text-on-surface-variant body-md">Simulated asset overview and price action.</p>
+</section>
+
+<!-- BTC Card -->
+<div class="glass-card rounded-[2rem] p-5 space-y-4">
+<div class="flex items-center justify-between">
+  <div class="flex items-center gap-3">
+    <div class="w-12 h-12 rounded-full bg-[#F7931A]/15 flex items-center justify-center">
+      <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#F7931A" opacity="0.25"/><text x="12" y="16" text-anchor="middle" font-family="Arial" font-weight="900" font-size="13" fill="#F7931A">&#x20bf;</text></svg>
+    </div>
+    <div>
+      <p class="font-bold text-on-surface">Bitcoin</p>
+      <p class="text-xs text-on-surface-variant">BTC</p>
+    </div>
+  </div>
+  <div class="text-right">
+    <p id="market-btc-price" class="font-mono font-bold text-on-surface">$60,000.00</p>
+    <p id="market-btc-change" class="text-xs font-bold text-emerald-400">--</p>
+  </div>
+</div>
+<div style="height:80px;"><canvas id="market-btc-chart"></canvas></div>
+<div class="flex justify-between text-[10px] text-on-surface-variant uppercase tracking-widest">
+  <span><span data-i18n="market_vol">Volatility</span>: <span id="market-btc-vol" class="text-on-surface font-bold">3%</span></span>
+  <span><span data-i18n="market_high">High</span>: <span id="market-btc-high" class="text-on-surface font-bold">--</span></span>
+  <span><span data-i18n="market_low">Low</span>: <span id="market-btc-low" class="text-on-surface font-bold">--</span></span>
+</div>
+</div>
+
+<!-- USDT Card -->
+<div class="glass-card rounded-[2rem] p-5 space-y-4">
+<div class="flex items-center justify-between">
+  <div class="flex items-center gap-3">
+    <div class="w-12 h-12 rounded-full bg-emerald-500/15 flex items-center justify-center">
+      <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#10B981" opacity="0.25"/><text x="12" y="16" text-anchor="middle" font-family="Arial" font-weight="800" font-size="13" fill="#10B981">$</text></svg>
+    </div>
+    <div>
+      <p class="font-bold text-on-surface">Tether</p>
+      <p class="text-xs text-on-surface-variant">USDT</p>
+    </div>
+  </div>
+  <div class="text-right">
+    <p id="market-usdt-price" class="font-mono font-bold text-on-surface">$1.00</p>
+    <p id="market-usdt-change" class="text-xs font-bold text-emerald-400">--</p>
+  </div>
+</div>
+<div style="height:80px;"><canvas id="market-usdt-chart"></canvas></div>
+<div class="flex justify-between text-[10px] text-on-surface-variant uppercase tracking-widest">
+  <span><span data-i18n="market_vol">Volatility</span>: <span id="market-usdt-vol" class="text-on-surface font-bold">0.1%</span></span>
+  <span><span data-i18n="market_high">High</span>: <span id="market-usdt-high" class="text-on-surface font-bold">--</span></span>
+  <span><span data-i18n="market_low">Low</span>: <span id="market-usdt-low" class="text-on-surface font-bold">--</span></span>
+</div>
+</div>
+</div>
+
+<!-- ═══════════════ PAGE: SIMULATE ═══════════════ -->
+<div id="page-simulate" class="pt-24 pb-32 px-4 max-w-lg mx-auto space-y-8">
 <section class="space-y-1">
 <h2 data-i18n="title" class="text-3xl font-extrabold tracking-tight text-on-surface font-headline">Simulate Engine</h2>
 <p data-i18n="subtitle" class="text-on-surface-variant body-md">Backtest high-frequency strategies with precision.</p>
 </section>
-<!-- Main Simulation Config Card -->
 <div class="glass-card rounded-[2rem] p-6 space-y-8">
 <!-- Asset Selection -->
 <div class="space-y-4">
 <label data-i18n="trading_pair" class="label-md text-xs font-semibold uppercase tracking-[0.1em] text-on-surface-variant">Active Trading Pair</label>
-<div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-2xl border-b border-outline-variant/10">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center">
-<span class="material-symbols-outlined text-[#F7931A]" style="font-variation-settings: 'FILL' 1;">currency_bitcoin</span>
-</div>
-<div>
-<p class="font-bold text-on-surface">BTC / USDT</p>
-<p data-i18n="binance_spot" class="text-xs text-on-surface-variant">Binance Spot</p>
-</div>
-</div>
-<span class="material-symbols-outlined text-zinc-500">expand_more</span>
+<div id="pair-toggle" class="flex gap-3">
+<button data-pair="BTC" class="pair-btn flex-1 flex items-center justify-center gap-2 p-3 rounded-2xl font-bold transition-all duration-300 bg-primary-container/20 text-[#F7931A] active-glow border border-[#F7931A]/20 scale-[0.98] shadow-inner">
+  <svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="#F7931A" opacity="0.2"/><text x="10" y="14" text-anchor="middle" font-family="Arial" font-weight="900" font-size="11" fill="#F7931A">&#x20bf;</text></svg>
+  <span>BTC</span>
+</button>
+<button data-pair="USDT" class="pair-btn flex-1 flex items-center justify-center gap-2 p-3 rounded-2xl font-bold transition-all duration-300 bg-surface-container-lowest text-zinc-500 active:scale-95">
+  <svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="#10B981" opacity="0.2"/><text x="10" y="14" text-anchor="middle" font-family="Arial" font-weight="800" font-size="11" fill="#10B981">$</text></svg>
+  <span>USDT</span>
+</button>
 </div>
 </div>
 <!-- Lookback Period Toggle -->
@@ -260,25 +393,67 @@
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
 <span data-i18n="run_sim">Run Simulation</span>
 </button>
-</main>
-<!-- BottomNavBar -->
+</div>
+
+<!-- ═══════════════ PAGE: LEDGER ═══════════════ -->
+<div id="page-ledger" class="hidden pt-24 pb-32 px-4 max-w-lg mx-auto space-y-6">
+<section class="space-y-1">
+<h2 data-i18n="ledger_title" class="text-3xl font-extrabold tracking-tight text-on-surface font-headline">Trade History</h2>
+<p data-i18n="ledger_subtitle" class="text-on-surface-variant body-md">Complete record of all simulation signals.</p>
+</section>
+
+<!-- Summary stats -->
+<div class="flex gap-3">
+<div class="flex-1 glass-card rounded-2xl p-4 text-center">
+  <p class="text-[10px] text-on-surface-variant uppercase tracking-widest font-bold" data-i18n="ledger_total_trades">Total Trades</p>
+  <p id="ledger-total" class="text-2xl font-black text-on-surface mt-1">0</p>
+</div>
+<div class="flex-1 glass-card rounded-2xl p-4 text-center">
+  <p class="text-[10px] text-on-surface-variant uppercase tracking-widest font-bold" data-i18n="ledger_buys">Buys</p>
+  <p id="ledger-buys" class="text-2xl font-black text-emerald-400 mt-1">0</p>
+</div>
+<div class="flex-1 glass-card rounded-2xl p-4 text-center">
+  <p class="text-[10px] text-on-surface-variant uppercase tracking-widest font-bold" data-i18n="ledger_sells">Sells</p>
+  <p id="ledger-sells" class="text-2xl font-black text-error mt-1">0</p>
+</div>
+</div>
+
+<!-- Full ledger table -->
+<div class="glass-card rounded-[2rem] overflow-hidden">
+<div class="max-h-[60vh] overflow-y-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 bg-[#2A2A2C]/90 backdrop-blur-md z-20">
+<tr>
+<th data-i18n="th_action" class="p-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Action</th>
+<th data-i18n="th_price" class="p-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest text-right">Price</th>
+<th data-i18n="ledger_th_value" class="p-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest text-right">Value</th>
+<th data-i18n="th_date" class="p-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest text-right">Date</th>
+</tr>
+</thead>
+<tbody id="full-ledger-body" class="divide-y divide-outline-variant/5">
+<tr>
+<td colspan="4" data-i18n="ledger_empty" class="p-6 text-center text-zinc-500 text-sm">Run a simulation first to see trade history</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- BottomNavBar (3 tabs: Market, Simulate, Ledger) -->
 <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 px-4 pb-2 bg-zinc-900/80 backdrop-blur-2xl rounded-t-3xl border-t border-zinc-800 shadow-[0_-8px_32px_rgba(0,0,0,0.4)]">
-<div class="flex flex-col items-center justify-center text-zinc-500 py-2 px-4 hover:text-zinc-300 active:scale-96 transition-all duration-300 cursor-pointer">
+<button data-nav="market" class="nav-btn flex flex-col items-center justify-center text-zinc-500 py-2 px-4 hover:text-zinc-300 active:scale-96 transition-all duration-300 cursor-pointer">
 <span class="material-symbols-outlined mb-1">monitoring</span>
 <span data-i18n="nav_market" class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-[0.05em]">Market</span>
-</div>
-<div class="flex flex-col items-center justify-center text-zinc-500 py-2 px-4 hover:text-zinc-300 active:scale-96 transition-all duration-300 cursor-pointer">
-<span class="material-symbols-outlined mb-1">account_balance_wallet</span>
-<span data-i18n="nav_portfolio" class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-[0.05em]">Portfolio</span>
-</div>
-<div class="flex flex-col items-center justify-center text-[#F7931A] bg-[#F7931A]/10 rounded-2xl py-2 px-4 shadow-[0_0_20px_rgba(247,147,26,0.2)] scale-105 active:scale-96 transition-all duration-300 cursor-pointer">
+</button>
+<button data-nav="simulate" class="nav-btn flex flex-col items-center justify-center text-[#F7931A] bg-[#F7931A]/10 rounded-2xl py-2 px-4 shadow-[0_0_20px_rgba(247,147,26,0.2)] scale-105 active:scale-96 transition-all duration-300 cursor-pointer">
 <span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">memory</span>
 <span data-i18n="nav_simulate" class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-[0.05em]">Simulate</span>
-</div>
-<div class="flex flex-col items-center justify-center text-zinc-500 py-2 px-4 hover:text-zinc-300 active:scale-96 transition-all duration-300 cursor-pointer">
+</button>
+<button data-nav="ledger" class="nav-btn flex flex-col items-center justify-center text-zinc-500 py-2 px-4 hover:text-zinc-300 active:scale-96 transition-all duration-300 cursor-pointer">
 <span class="material-symbols-outlined mb-1">receipt_long</span>
 <span data-i18n="nav_ledger" class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-[0.05em]">Ledger</span>
-</div>
+</button>
 </nav>
 
 <script>
@@ -322,6 +497,29 @@ var i18n = {
         vol_medium_high:'Medium High',
         vol_high:       'High',
         vol_extreme:    'Extreme',
+        // Onboarding
+        onboard_tagline:  'Smart crypto trading simulator powered by mathematical models',
+        onboard_f1_title: 'Advanced Simulation',
+        onboard_f1_desc:  'Geometric Brownian Motion model with Golden Cross / Death Cross strategy',
+        onboard_f2_title: 'Leverage Up to 50x',
+        onboard_f2_desc:  'Test high-risk strategies with adjustable leverage multiplier',
+        onboard_f3_title: 'Real-time Charts',
+        onboard_f3_desc:  'Interactive Price vs SMA7 vs SMA30 visualization with signal tracking',
+        onboard_cta:      'Calculate Now',
+        // Market
+        market_title:     'Market',
+        market_subtitle:  'Simulated asset overview and price action.',
+        market_vol:       'Volatility',
+        market_high:      'High',
+        market_low:       'Low',
+        // Ledger page
+        ledger_title:     'Trade History',
+        ledger_subtitle:  'Complete record of all simulation signals.',
+        ledger_total_trades: 'Total Trades',
+        ledger_buys:      'Buys',
+        ledger_sells:     'Sells',
+        ledger_th_value:  'Value',
+        ledger_empty:     'Run a simulation first to see trade history',
     },
     ar: {
         title:          '\u0645\u062D\u0631\u0643 \u0627\u0644\u0645\u062D\u0627\u0643\u0627\u0629',
@@ -358,6 +556,29 @@ var i18n = {
         vol_medium_high:'\u0645\u062A\u0648\u0633\u0637 \u0645\u0631\u062A\u0641\u0639',
         vol_high:       '\u0645\u0631\u062A\u0641\u0639',
         vol_extreme:    '\u0634\u062F\u064A\u062F',
+        // Onboarding
+        onboard_tagline:  '\u0645\u062D\u0627\u0643\u064A \u062A\u062F\u0627\u0648\u0644 \u0639\u0645\u0644\u0627\u062A \u0631\u0642\u0645\u064A\u0629 \u0630\u0643\u064A \u0645\u062F\u0639\u0648\u0645 \u0628\u0646\u0645\u0627\u0630\u062C \u0631\u064A\u0627\u0636\u064A\u0629',
+        onboard_f1_title: '\u0645\u062D\u0627\u0643\u0627\u0629 \u0645\u062A\u0642\u062F\u0645\u0629',
+        onboard_f1_desc:  '\u0646\u0645\u0648\u0630\u062C \u0627\u0644\u062D\u0631\u0643\u0629 \u0627\u0644\u0628\u0631\u0627\u0648\u0646\u064A\u0629 \u0627\u0644\u0647\u0646\u062F\u0633\u064A\u0629 \u0645\u0639 \u0627\u0633\u062A\u0631\u0627\u062A\u064A\u062C\u064A\u0629 \u0627\u0644\u062A\u0642\u0627\u0637\u0639 \u0627\u0644\u0630\u0647\u0628\u064A / \u062A\u0642\u0627\u0637\u0639 \u0627\u0644\u0645\u0648\u062A',
+        onboard_f2_title: '\u0631\u0627\u0641\u0639\u0629 \u0645\u0627\u0644\u064A\u0629 \u062D\u062A\u0649 50x',
+        onboard_f2_desc:  '\u0627\u062E\u062A\u0628\u0631 \u0627\u0633\u062A\u0631\u0627\u062A\u064A\u062C\u064A\u0627\u062A \u0639\u0627\u0644\u064A\u0629 \u0627\u0644\u0645\u062E\u0627\u0637\u0631 \u0645\u0639 \u0645\u0636\u0627\u0639\u0641 \u0631\u0627\u0641\u0639\u0629 \u0642\u0627\u0628\u0644 \u0644\u0644\u062A\u0639\u062F\u064A\u0644',
+        onboard_f3_title: '\u0631\u0633\u0648\u0645 \u0628\u064A\u0627\u0646\u064A\u0629 \u062A\u0641\u0627\u0639\u0644\u064A\u0629',
+        onboard_f3_desc:  '\u0639\u0631\u0636 \u062A\u0641\u0627\u0639\u0644\u064A \u0644\u0644\u0633\u0639\u0631 \u0645\u0642\u0627\u0628\u0644 \u0627\u0644\u0645\u062A\u0648\u0633\u0637 7 \u0648 30 \u0645\u0639 \u062A\u062A\u0628\u0639 \u0627\u0644\u0625\u0634\u0627\u0631\u0627\u062A',
+        onboard_cta:      '\u0627\u062D\u0633\u0628 \u0627\u0644\u0622\u0646',
+        // Market
+        market_title:     '\u0627\u0644\u0633\u0648\u0642',
+        market_subtitle:  '\u0646\u0638\u0631\u0629 \u0639\u0627\u0645\u0629 \u0639\u0644\u0649 \u0627\u0644\u0623\u0635\u0648\u0644 \u0648\u062D\u0631\u0643\u0629 \u0627\u0644\u0623\u0633\u0639\u0627\u0631.',
+        market_vol:       '\u0627\u0644\u062A\u0642\u0644\u0628',
+        market_high:      '\u0623\u0639\u0644\u0649',
+        market_low:       '\u0623\u062F\u0646\u0649',
+        // Ledger page
+        ledger_title:     '\u0633\u062C\u0644 \u0627\u0644\u062A\u062F\u0627\u0648\u0644',
+        ledger_subtitle:  '\u0633\u062C\u0644 \u0643\u0627\u0645\u0644 \u0644\u062C\u0645\u064A\u0639 \u0625\u0634\u0627\u0631\u0627\u062A \u0627\u0644\u0645\u062D\u0627\u0643\u0627\u0629.',
+        ledger_total_trades: '\u0625\u062C\u0645\u0627\u0644\u064A \u0627\u0644\u0635\u0641\u0642\u0627\u062A',
+        ledger_buys:      '\u0634\u0631\u0627\u0621',
+        ledger_sells:     '\u0628\u064A\u0639',
+        ledger_th_value:  '\u0627\u0644\u0642\u064A\u0645\u0629',
+        ledger_empty:     '\u0634\u063A\u0651\u0644 \u0645\u062D\u0627\u0643\u0627\u0629 \u0623\u0648\u0644\u0627\u064B \u0644\u0639\u0631\u0636 \u0633\u062C\u0644 \u0627\u0644\u062A\u062F\u0627\u0648\u0644',
     }
 };
 
@@ -528,7 +749,8 @@ function simulateTrading(prices, sma7, sma30, initialBalance, leverage) {
 
 function runSimulation(days, volatility, leverage) {
     var initialBalance = 10000;
-    var prices = simulateBitcoinPrices(days, 60000, volatility, 0.0005);
+    var cfg = assetConfig[selectedPair] || assetConfig.BTC;
+    var prices = simulateBitcoinPrices(days, cfg.startPrice, volatility, cfg.drift);
     var sma7 = calculateSMA(prices, 7);
     var sma30 = calculateSMA(prices, 30);
     var result = simulateTrading(prices, sma7, sma30, initialBalance, leverage);
@@ -560,9 +782,16 @@ function runSimulation(days, volatility, leverage) {
 // ════════════════════════════════════════════════════════════════════
 
 var selectedDays = 90;
+var selectedPair = 'BTC';
 var priceChart = null;
 var lastSignals = null;
 var lastChartData = null;
+
+// Asset config: start price and default drift per pair
+var assetConfig = {
+    BTC:  { startPrice: 60000, drift: 0.0005 },
+    USDT: { startPrice: 1.0,   drift: 0.00001 }
+};
 
 var leverageSlider  = document.getElementById('leverage-slider');
 var leverageDisplay = document.getElementById('leverage-display');
@@ -589,6 +818,23 @@ leverageSlider.addEventListener('input', function() {
 });
 volSlider.addEventListener('input', function() {
     volDisplay.textContent = volLabel(parseFloat(volSlider.value));
+});
+
+// ── Pair toggle ────────────────────────────────────────────────────
+var pairBtns = document.querySelectorAll('.pair-btn');
+var pairActiveClasses  = ['bg-primary-container/20','text-[#F7931A]','active-glow','border','border-[#F7931A]/20','scale-[0.98]','shadow-inner'];
+var pairDefaultClasses = ['bg-surface-container-lowest','text-zinc-500'];
+
+pairBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        pairBtns.forEach(function(b) {
+            b.classList.remove.apply(b.classList, pairActiveClasses);
+            b.classList.add.apply(b.classList, pairDefaultClasses);
+        });
+        btn.classList.remove.apply(btn.classList, pairDefaultClasses);
+        btn.classList.add.apply(btn.classList, pairActiveClasses);
+        selectedPair = btn.dataset.pair;
+    });
 });
 
 var daysBtns = document.querySelectorAll('.days-btn');
@@ -782,8 +1028,143 @@ function handleRunSimulation() {
 
 runBtn.addEventListener('click', handleRunSimulation);
 
+// ── Navigation tab switching ───────────────────────────────────────
+var pages = { market: document.getElementById('page-market'), simulate: document.getElementById('page-simulate'), ledger: document.getElementById('page-ledger') };
+var navBtns = document.querySelectorAll('.nav-btn');
+var navActiveClasses = ['text-[#F7931A]','bg-[#F7931A]/10','rounded-2xl','shadow-[0_0_20px_rgba(247,147,26,0.2)]','scale-105'];
+var navInactiveClasses = ['text-zinc-500'];
+
+function switchPage(name) {
+    // Hide all pages, show selected
+    Object.keys(pages).forEach(function(k) {
+        if (pages[k]) pages[k].classList.toggle('hidden', k !== name);
+    });
+    // Update nav button styles
+    navBtns.forEach(function(btn) {
+        var isActive = btn.dataset.nav === name;
+        navActiveClasses.forEach(function(c) { btn.classList.toggle(c, isActive); });
+        navInactiveClasses.forEach(function(c) { btn.classList.toggle(c, !isActive); });
+        // Fill icon for active tab
+        var icon = btn.querySelector('.material-symbols-outlined');
+        if (icon) icon.style.fontVariationSettings = isActive ? "'FILL' 1" : "'FILL' 0";
+    });
+    // Generate market data when switching to market tab
+    if (name === 'market') generateMarketData();
+    // Populate full ledger when switching to ledger tab
+    if (name === 'ledger') populateFullLedger();
+}
+
+navBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() { switchPage(btn.dataset.nav); });
+});
+
+// ── Market page data generation ────────────────────────────────────
+var marketBtcChart = null;
+var marketUsdtChart = null;
+
+function generateMarketData() {
+    // Generate 30-day price data for both assets
+    var btcPrices = simulateBitcoinPrices(30, 60000, 0.03, 0.0005);
+    var usdtPrices = simulateBitcoinPrices(30, 1.0, 0.001, 0.00001);
+
+    var btcLast = btcPrices[btcPrices.length - 1].price;
+    var btcFirst = btcPrices[0].price;
+    var btcChange = ((btcLast - btcFirst) / btcFirst * 100);
+    var btcHigh = Math.max.apply(null, btcPrices.map(function(p){return p.price;}));
+    var btcLow = Math.min.apply(null, btcPrices.map(function(p){return p.price;}));
+
+    document.getElementById('market-btc-price').textContent = '$' + btcLast.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+    var btcChangeEl = document.getElementById('market-btc-change');
+    btcChangeEl.textContent = (btcChange >= 0 ? '+' : '') + btcChange.toFixed(2) + '%';
+    btcChangeEl.className = 'text-xs font-bold ' + (btcChange >= 0 ? 'text-emerald-400' : 'text-error');
+    document.getElementById('market-btc-high').textContent = '$' + btcHigh.toLocaleString(undefined, {maximumFractionDigits:0});
+    document.getElementById('market-btc-low').textContent = '$' + btcLow.toLocaleString(undefined, {maximumFractionDigits:0});
+
+    var usdtLast = usdtPrices[usdtPrices.length - 1].price;
+    var usdtFirst = usdtPrices[0].price;
+    var usdtChange = ((usdtLast - usdtFirst) / usdtFirst * 100);
+    var usdtHigh = Math.max.apply(null, usdtPrices.map(function(p){return p.price;}));
+    var usdtLow = Math.min.apply(null, usdtPrices.map(function(p){return p.price;}));
+
+    document.getElementById('market-usdt-price').textContent = '$' + usdtLast.toFixed(4);
+    var usdtChangeEl = document.getElementById('market-usdt-change');
+    usdtChangeEl.textContent = (usdtChange >= 0 ? '+' : '') + usdtChange.toFixed(4) + '%';
+    usdtChangeEl.className = 'text-xs font-bold ' + (usdtChange >= 0 ? 'text-emerald-400' : 'text-error');
+    document.getElementById('market-usdt-high').textContent = '$' + usdtHigh.toFixed(4);
+    document.getElementById('market-usdt-low').textContent = '$' + usdtLow.toFixed(4);
+
+    // Mini sparkline charts
+    function miniChart(canvasId, data, color, existingChart) {
+        if (existingChart) existingChart.destroy();
+        var ctx = document.getElementById(canvasId).getContext('2d');
+        return new Chart(ctx, {
+            type: 'line',
+            data: { labels: data.map(function(p){return p.date;}), datasets: [{ data: data.map(function(p){return p.price;}), borderColor: color, borderWidth: 1.5, pointRadius: 0, tension: 0.4, fill: true, backgroundColor: color.replace(')', ',0.08)').replace('rgb', 'rgba') }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { enabled: false } }, scales: { x: { display: false }, y: { display: false } } }
+        });
+    }
+    marketBtcChart = miniChart('market-btc-chart', btcPrices, 'rgb(247,147,26)', marketBtcChart);
+    marketUsdtChart = miniChart('market-usdt-chart', usdtPrices, 'rgb(16,185,129)', marketUsdtChart);
+}
+
+// ── Full ledger page population ────────────────────────────────────
+function populateFullLedger() {
+    var body = document.getElementById('full-ledger-body');
+    if (!lastSignals || lastSignals.length === 0) {
+        body.innerHTML = '<tr><td colspan="4" class="p-6 text-center text-zinc-500 text-sm">' + t('ledger_empty') + '</td></tr>';
+        document.getElementById('ledger-total').textContent = '0';
+        document.getElementById('ledger-buys').textContent = '0';
+        document.getElementById('ledger-sells').textContent = '0';
+        return;
+    }
+    var buys = lastSignals.filter(function(s){return s.Action==='BUY';}).length;
+    var sells = lastSignals.filter(function(s){return s.Action==='SELL';}).length;
+    document.getElementById('ledger-total').textContent = lastSignals.length;
+    document.getElementById('ledger-buys').textContent = buys;
+    document.getElementById('ledger-sells').textContent = sells;
+
+    var reversed = lastSignals.slice().reverse();
+    body.innerHTML = reversed.map(function(s, i) {
+        var isBuy = s.Action === 'BUY';
+        var bgClass = i % 2 === 1 ? ' bg-surface-container-low/30' : '';
+        var badgeBg = isBuy ? 'bg-emerald-500/10' : 'bg-error/10';
+        var badgeText = isBuy ? 'text-emerald-500' : 'text-error';
+        var label = isBuy ? t('long') : t('short');
+        var price = '$' + s.Price.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+        var value = '$' + s['Total Value'].toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+        return '<tr class="hover:bg-primary-container/5 transition-colors' + bgClass + '">' +
+            '<td class="p-4"><span class="inline-flex items-center px-2 py-0.5 rounded-md ' + badgeBg + ' ' + badgeText + ' text-[10px] font-black uppercase">' + label + '</span></td>' +
+            '<td class="p-4 text-right font-mono text-sm font-bold text-on-surface">' + price + '</td>' +
+            '<td class="p-4 text-right font-mono text-sm text-on-surface-variant">' + value + '</td>' +
+            '<td class="p-4 text-right text-xs text-on-surface-variant">' + s.Date + '</td>' +
+        '</tr>';
+    }).join('');
+}
+
 // Language toggle button
 document.getElementById('lang-btn').addEventListener('click', toggleLanguage);
+
+// ── Onboarding dismiss ─────────────────────────────────────────────
+(function() {
+    var onboard = document.getElementById('onboarding');
+    var cta = document.getElementById('onboard-cta');
+    if (!onboard || !cta) return;
+
+    // Check if user already dismissed onboarding
+    try {
+        if (localStorage.getItem('bitlogic-onboarded') === '1') {
+            onboard.remove();
+            return;
+        }
+    } catch(e) {}
+
+    cta.addEventListener('click', function() {
+        onboard.style.opacity = '0';
+        onboard.style.pointerEvents = 'none';
+        setTimeout(function() { onboard.remove(); }, 700);
+        try { localStorage.setItem('bitlogic-onboarded', '1'); } catch(e) {}
+    });
+})();
 
 // Restore saved language preference
 (function() {
@@ -794,5 +1175,10 @@ document.getElementById('lang-btn').addEventListener('click', toggleLanguage);
         }
     } catch(e) {}
 })();
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(function() {});
+}
 </script>
 </body></html>

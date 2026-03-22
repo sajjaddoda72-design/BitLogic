@@ -16,6 +16,7 @@ from pathlib import Path
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from bitcoin_trading_sim import run_simulation
 
@@ -30,6 +31,21 @@ app.add_middleware(
 )
 
 STATIC_DIR = Path(__file__).resolve().parent
+
+# Serve static files (manifest.json, sw.js, icons/, etc.)
+app.mount("/icons", StaticFiles(directory=str(STATIC_DIR / "icons")), name="icons")
+
+
+@app.get("/manifest.json")
+def serve_manifest() -> FileResponse:
+    """Serve the PWA manifest."""
+    return FileResponse(STATIC_DIR / "manifest.json", media_type="application/json")
+
+
+@app.get("/sw.js")
+def serve_sw() -> FileResponse:
+    """Serve the service worker."""
+    return FileResponse(STATIC_DIR / "sw.js", media_type="application/javascript")
 
 
 @app.get("/")
