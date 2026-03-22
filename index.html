@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="en"><head>
+<html class="dark" lang="en" dir="ltr"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>CryptoSim - Bitcoin Trading Simulator</title>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
@@ -63,9 +64,9 @@
               "primary-fixed": "#ffdcbf"
             },
             fontFamily: {
-              "headline": ["Manrope"],
-              "body": ["Manrope"],
-              "label": ["Manrope"]
+              "headline": ["Manrope", "Noto Kufi Arabic", "sans-serif"],
+              "body": ["Manrope", "Noto Kufi Arabic", "sans-serif"],
+              "label": ["Manrope", "Noto Kufi Arabic", "sans-serif"]
             },
             borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
           },
@@ -94,7 +95,6 @@
             background: #2a2a2c;
             border-radius: 10px;
         }
-        /* Style the native range inputs to match the orange theme */
         input[type="range"] {
             -webkit-appearance: none;
             appearance: none;
@@ -144,8 +144,13 @@
 <span class="material-symbols-outlined text-[#F7931A] text-2xl cursor-pointer hover:bg-zinc-800/50 transition-colors p-2 rounded-full active:scale-95 transition-transform duration-300">grid_view</span>
 <h1 class="text-xl font-black text-[#F7931A] tracking-tighter font-headline">CryptoSim</h1>
 </div>
-<div class="flex items-center gap-2">
-<div class="h-2 w-2 rounded-full bg-primary-container animate-pulse mr-1"></div>
+<div class="flex items-center gap-3">
+<!-- Language Toggle Button -->
+<button id="lang-btn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-highest/60 border border-outline-variant/20 hover:bg-surface-container-highest transition-all duration-300 active:scale-95 cursor-pointer" title="Switch language">
+<span class="material-symbols-outlined text-[#F7931A] text-base">translate</span>
+<span id="lang-label" class="text-xs font-bold text-on-surface-variant">AR</span>
+</button>
+<div class="h-2 w-2 rounded-full bg-primary-container animate-pulse"></div>
 <span class="material-symbols-outlined text-zinc-100 cursor-pointer hover:bg-zinc-800/50 p-2 rounded-full">sensors</span>
 </div>
 </div>
@@ -153,14 +158,14 @@
 <main class="pt-24 pb-32 px-4 max-w-lg mx-auto space-y-8">
 <!-- Header Section -->
 <section class="space-y-1">
-<h2 class="text-3xl font-extrabold tracking-tight text-on-surface font-headline">Simulate Engine</h2>
-<p class="text-on-surface-variant body-md">Backtest high-frequency strategies with precision.</p>
+<h2 data-i18n="title" class="text-3xl font-extrabold tracking-tight text-on-surface font-headline">Simulate Engine</h2>
+<p data-i18n="subtitle" class="text-on-surface-variant body-md">Backtest high-frequency strategies with precision.</p>
 </section>
 <!-- Main Simulation Config Card -->
 <div class="glass-card rounded-[2rem] p-6 space-y-8">
 <!-- Asset Selection -->
 <div class="space-y-4">
-<label class="label-md text-xs font-semibold uppercase tracking-[0.1em] text-on-surface-variant">Active Trading Pair</label>
+<label data-i18n="trading_pair" class="label-md text-xs font-semibold uppercase tracking-[0.1em] text-on-surface-variant">Active Trading Pair</label>
 <div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-2xl border-b border-outline-variant/10">
 <div class="flex items-center gap-3">
 <div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center">
@@ -168,7 +173,7 @@
 </div>
 <div>
 <p class="font-bold text-on-surface">BTC / USDT</p>
-<p class="text-xs text-on-surface-variant">Binance Spot</p>
+<p data-i18n="binance_spot" class="text-xs text-on-surface-variant">Binance Spot</p>
 </div>
 </div>
 <span class="material-symbols-outlined text-zinc-500">expand_more</span>
@@ -176,18 +181,18 @@
 </div>
 <!-- Lookback Period Toggle -->
 <div class="space-y-4">
-<label class="label-md text-xs font-semibold uppercase tracking-[0.1em] text-on-surface-variant">Lookback Period</label>
+<label data-i18n="lookback" class="label-md text-xs font-semibold uppercase tracking-[0.1em] text-on-surface-variant">Lookback Period</label>
 <div id="days-toggle" class="flex gap-3">
-<button data-days="30" class="days-btn flex-1 py-3 px-4 rounded-xl font-bold transition-all duration-300 bg-surface-container-lowest text-zinc-500 active:scale-95">30D</button>
-<button data-days="90" class="days-btn flex-1 py-3 px-4 rounded-xl font-bold transition-all duration-300 bg-primary-container/20 text-[#F7931A] active-glow border border-[#F7931A]/20 scale-[0.98] shadow-inner">90D</button>
-<button data-days="365" class="days-btn flex-1 py-3 px-4 rounded-xl font-bold transition-all duration-300 bg-surface-container-lowest text-zinc-500 active:scale-95">365D</button>
+<button data-days="30" data-i18n="days_30" class="days-btn flex-1 py-3 px-4 rounded-xl font-bold transition-all duration-300 bg-surface-container-lowest text-zinc-500 active:scale-95">30D</button>
+<button data-days="90" data-i18n="days_90" class="days-btn flex-1 py-3 px-4 rounded-xl font-bold transition-all duration-300 bg-primary-container/20 text-[#F7931A] active-glow border border-[#F7931A]/20 scale-[0.98] shadow-inner">90D</button>
+<button data-days="365" data-i18n="days_365" class="days-btn flex-1 py-3 px-4 rounded-xl font-bold transition-all duration-300 bg-surface-container-lowest text-zinc-500 active:scale-95">365D</button>
 </div>
 </div>
 <!-- Interactive Slider Section -->
 <div class="space-y-6">
 <div class="space-y-4">
 <div class="flex justify-between items-center">
-<label class="label-md text-xs font-semibold uppercase tracking-[0.1em] text-on-surface-variant">Leverage Multiplier</label>
+<label data-i18n="leverage" class="label-md text-xs font-semibold uppercase tracking-[0.1em] text-on-surface-variant">Leverage Multiplier</label>
 <span id="leverage-display" class="text-[#F7931A] font-black tracking-tighter">10.0x</span>
 </div>
 <div class="relative h-12 flex items-center px-1">
@@ -196,7 +201,7 @@
 </div>
 <div class="space-y-4">
 <div class="flex justify-between items-center">
-<label class="label-md text-xs font-semibold uppercase tracking-[0.1em] text-on-surface-variant">Risk Variance</label>
+<label data-i18n="risk_variance" class="label-md text-xs font-semibold uppercase tracking-[0.1em] text-on-surface-variant">Risk Variance</label>
 <span id="volatility-display" class="text-[#F7931A] font-black tracking-tighter">Medium High</span>
 </div>
 <div class="relative h-12 flex items-center px-1">
@@ -209,16 +214,16 @@
 <div class="glass-card rounded-[2rem] p-6 overflow-hidden relative">
 <div class="flex justify-between items-start mb-4">
 <div>
-<p class="text-xs text-on-surface-variant font-bold uppercase tracking-widest">Expected Yield</p>
+<p data-i18n="expected_yield" class="text-xs text-on-surface-variant font-bold uppercase tracking-widest">Expected Yield</p>
 <div class="flex items-baseline gap-2 mt-1">
 <h3 id="yield-display" class="text-4xl font-black text-on-surface tracking-tighter">--</h3>
 <span id="yield-arrow" class="text-primary text-sm font-bold"></span>
 </div>
-<p class="text-xs text-on-surface-variant mt-1">Portfolio: <span id="portfolio-display" class="text-on-surface font-bold">$10,000.00</span></p>
+<p class="text-xs text-on-surface-variant mt-1"><span data-i18n="portfolio">Portfolio</span>: <span id="portfolio-display" class="text-on-surface font-bold">$10,000.00</span></p>
 </div>
 <div class="flex items-center gap-2">
 <div class="w-2 h-2 rounded-full bg-[#F7931A] animate-ping"></div>
-<span class="text-[10px] font-bold text-[#F7931A] uppercase tracking-widest">Live Flow</span>
+<span data-i18n="live_flow" class="text-[10px] font-bold text-[#F7931A] uppercase tracking-widest">Live Flow</span>
 </div>
 </div>
 <div class="w-full" style="height: 220px;">
@@ -228,7 +233,7 @@
 <!-- Ledger Table Section -->
 <div class="space-y-4">
 <div class="flex justify-between items-end">
-<h3 class="headline-lg text-xl font-bold tracking-tight">Signal Ledger</h3>
+<h3 data-i18n="signal_ledger" class="headline-lg text-xl font-bold tracking-tight">Signal Ledger</h3>
 <span id="signal-count" class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">0 Signals</span>
 </div>
 <div class="glass-card rounded-[2rem] overflow-hidden">
@@ -236,14 +241,14 @@
 <table class="w-full text-left border-collapse">
 <thead class="sticky top-0 bg-[#2A2A2C]/90 backdrop-blur-md z-20">
 <tr>
-<th class="p-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Action</th>
-<th class="p-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest text-right">Price</th>
-<th class="p-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest text-right">Date</th>
+<th data-i18n="th_action" class="p-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Action</th>
+<th data-i18n="th_price" class="p-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest text-right">Price</th>
+<th data-i18n="th_date" class="p-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest text-right">Date</th>
 </tr>
 </thead>
 <tbody id="ledger-body" class="divide-y divide-outline-variant/5">
 <tr>
-<td colspan="3" class="p-6 text-center text-zinc-500 text-sm">Run a simulation to see signals</td>
+<td colspan="3" data-i18n="empty_ledger" class="p-6 text-center text-zinc-500 text-sm">Run a simulation to see signals</td>
 </tr>
 </tbody>
 </table>
@@ -253,66 +258,188 @@
 <!-- Dynamic Action Button -->
 <button id="run-btn" class="w-full py-5 rounded-[2rem] bg-gradient-to-r from-primary-container to-[#ffb874] text-on-primary font-black text-lg tracking-tight shadow-[0_12px_32px_rgba(247,147,26,0.3)] active:scale-95 active:shadow-inner transition-all duration-300 flex items-center justify-center gap-3">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
-            Run Simulation
-        </button>
+<span data-i18n="run_sim">Run Simulation</span>
+</button>
 </main>
 <!-- BottomNavBar -->
 <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 px-4 pb-2 bg-zinc-900/80 backdrop-blur-2xl rounded-t-3xl border-t border-zinc-800 shadow-[0_-8px_32px_rgba(0,0,0,0.4)]">
 <div class="flex flex-col items-center justify-center text-zinc-500 py-2 px-4 hover:text-zinc-300 active:scale-96 transition-all duration-300 cursor-pointer">
 <span class="material-symbols-outlined mb-1">monitoring</span>
-<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-[0.05em]">Market</span>
+<span data-i18n="nav_market" class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-[0.05em]">Market</span>
 </div>
 <div class="flex flex-col items-center justify-center text-zinc-500 py-2 px-4 hover:text-zinc-300 active:scale-96 transition-all duration-300 cursor-pointer">
 <span class="material-symbols-outlined mb-1">account_balance_wallet</span>
-<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-[0.05em]">Portfolio</span>
+<span data-i18n="nav_portfolio" class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-[0.05em]">Portfolio</span>
 </div>
 <div class="flex flex-col items-center justify-center text-[#F7931A] bg-[#F7931A]/10 rounded-2xl py-2 px-4 shadow-[0_0_20px_rgba(247,147,26,0.2)] scale-105 active:scale-96 transition-all duration-300 cursor-pointer">
 <span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">memory</span>
-<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-[0.05em]">Simulate</span>
+<span data-i18n="nav_simulate" class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-[0.05em]">Simulate</span>
 </div>
 <div class="flex flex-col items-center justify-center text-zinc-500 py-2 px-4 hover:text-zinc-300 active:scale-96 transition-all duration-300 cursor-pointer">
 <span class="material-symbols-outlined mb-1">receipt_long</span>
-<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-[0.05em]">Ledger</span>
+<span data-i18n="nav_ledger" class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-[0.05em]">Ledger</span>
 </div>
 </nav>
 
 <script>
 // ════════════════════════════════════════════════════════════════════
-// Bitcoin Trading Simulator - Client-Side Engine
-// Ports the Python mathematical model (Geometric Brownian Motion +
-// Golden Cross / Death Cross strategy with leverage) to JavaScript.
+// i18n – Arabic / English translation system
 // ════════════════════════════════════════════════════════════════════
 
-// ── Seeded PRNG (Mulberry32) ───────────────────────────────────────
-// Deterministic random number generator so results are reproducible.
+var i18n = {
+    en: {
+        title:          'Simulate Engine',
+        subtitle:       'Backtest high-frequency strategies with precision.',
+        trading_pair:   'Active Trading Pair',
+        binance_spot:   'Binance Spot',
+        lookback:       'Lookback Period',
+        days_30:        '30D',
+        days_90:        '90D',
+        days_365:       '365D',
+        leverage:       'Leverage Multiplier',
+        risk_variance:  'Risk Variance',
+        expected_yield: 'Expected Yield',
+        portfolio:      'Portfolio',
+        live_flow:      'Live Flow',
+        signal_ledger:  'Signal Ledger',
+        th_action:      'Action',
+        th_price:       'Price',
+        th_date:        'Date',
+        empty_ledger:   'Run a simulation to see signals',
+        run_sim:        'Run Simulation',
+        simulating:     'Simulating...',
+        nav_market:     'Market',
+        nav_portfolio:  'Portfolio',
+        nav_simulate:   'Simulate',
+        nav_ledger:     'Ledger',
+        signals_count:  function(n) { return n + ' Signal' + (n !== 1 ? 's' : ''); },
+        no_signals:     'No BUY/SELL signals in this period',
+        long:           'Long',
+        short:          'Short',
+        vol_very_low:   'Very Low',
+        vol_low:        'Low',
+        vol_medium:     'Medium',
+        vol_medium_high:'Medium High',
+        vol_high:       'High',
+        vol_extreme:    'Extreme',
+    },
+    ar: {
+        title:          '\u0645\u062D\u0631\u0643 \u0627\u0644\u0645\u062D\u0627\u0643\u0627\u0629',
+        subtitle:       '\u0627\u062E\u062A\u0628\u0631 \u0627\u0633\u062A\u0631\u0627\u062A\u064A\u062C\u064A\u0627\u062A \u0627\u0644\u062A\u062F\u0627\u0648\u0644 \u0639\u0627\u0644\u064A\u0629 \u0627\u0644\u062A\u0631\u062F\u062F \u0628\u062F\u0642\u0629.',
+        trading_pair:   '\u0632\u0648\u062C \u0627\u0644\u062A\u062F\u0627\u0648\u0644 \u0627\u0644\u0646\u0634\u0637',
+        binance_spot:   '\u0628\u064A\u0646\u0627\u0646\u0633 \u0641\u0648\u0631\u064A',
+        lookback:       '\u0641\u062A\u0631\u0629 \u0627\u0644\u0645\u0631\u0627\u062C\u0639\u0629',
+        days_30:        '30\u064A',
+        days_90:        '90\u064A',
+        days_365:       '365\u064A',
+        leverage:       '\u0645\u0636\u0627\u0639\u0641 \u0627\u0644\u0631\u0627\u0641\u0639\u0629 \u0627\u0644\u0645\u0627\u0644\u064A\u0629',
+        risk_variance:  '\u062A\u0628\u0627\u064A\u0646 \u0627\u0644\u0645\u062E\u0627\u0637\u0631',
+        expected_yield: '\u0627\u0644\u0639\u0627\u0626\u062F \u0627\u0644\u0645\u062A\u0648\u0642\u0639',
+        portfolio:      '\u0627\u0644\u0645\u062D\u0641\u0638\u0629',
+        live_flow:      '\u0628\u062B \u0645\u0628\u0627\u0634\u0631',
+        signal_ledger:  '\u0633\u062C\u0644 \u0627\u0644\u0625\u0634\u0627\u0631\u0627\u062A',
+        th_action:      '\u0627\u0644\u0625\u062C\u0631\u0627\u0621',
+        th_price:       '\u0627\u0644\u0633\u0639\u0631',
+        th_date:        '\u0627\u0644\u062A\u0627\u0631\u064A\u062E',
+        empty_ledger:   '\u0634\u063A\u0651\u0644 \u0645\u062D\u0627\u0643\u0627\u0629 \u0644\u0639\u0631\u0636 \u0627\u0644\u0625\u0634\u0627\u0631\u0627\u062A',
+        run_sim:        '\u062A\u0634\u063A\u064A\u0644 \u0627\u0644\u0645\u062D\u0627\u0643\u0627\u0629',
+        simulating:     '\u062C\u0627\u0631\u064D \u0627\u0644\u0645\u062D\u0627\u0643\u0627\u0629...',
+        nav_market:     '\u0627\u0644\u0633\u0648\u0642',
+        nav_portfolio:  '\u0627\u0644\u0645\u062D\u0641\u0638\u0629',
+        nav_simulate:   '\u0645\u062D\u0627\u0643\u0627\u0629',
+        nav_ledger:     '\u0627\u0644\u0633\u062C\u0644',
+        signals_count:  function(n) { return n + ' \u0625\u0634\u0627\u0631\u0629'; },
+        no_signals:     '\u0644\u0627 \u062A\u0648\u062C\u062F \u0625\u0634\u0627\u0631\u0627\u062A \u0634\u0631\u0627\u0621/\u0628\u064A\u0639 \u0641\u064A \u0647\u0630\u0647 \u0627\u0644\u0641\u062A\u0631\u0629',
+        long:           '\u0634\u0631\u0627\u0621',
+        short:          '\u0628\u064A\u0639',
+        vol_very_low:   '\u0645\u0646\u062E\u0641\u0636 \u062C\u062F\u0627\u064B',
+        vol_low:        '\u0645\u0646\u062E\u0641\u0636',
+        vol_medium:     '\u0645\u062A\u0648\u0633\u0637',
+        vol_medium_high:'\u0645\u062A\u0648\u0633\u0637 \u0645\u0631\u062A\u0641\u0639',
+        vol_high:       '\u0645\u0631\u062A\u0641\u0639',
+        vol_extreme:    '\u0634\u062F\u064A\u062F',
+    }
+};
+
+var currentLang = 'en';
+
+function t(key) {
+    return i18n[currentLang][key] || i18n['en'][key] || key;
+}
+
+// Apply translations to all elements with data-i18n attribute
+function applyTranslations() {
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n');
+        if (i18n[currentLang][key] !== undefined) {
+            var val = i18n[currentLang][key];
+            el.textContent = typeof val === 'function' ? '' : val;
+        }
+    });
+}
+
+// Toggle language and update everything
+function toggleLanguage() {
+    currentLang = currentLang === 'en' ? 'ar' : 'en';
+    var isAr = currentLang === 'ar';
+
+    // Update HTML dir and lang
+    document.documentElement.dir = isAr ? 'rtl' : 'ltr';
+    document.documentElement.lang = isAr ? 'ar' : 'en';
+
+    // Update the toggle button label (show the OTHER language as the option)
+    document.getElementById('lang-label').textContent = isAr ? 'EN' : 'AR';
+
+    // Apply all static translations
+    applyTranslations();
+
+    // Re-apply dynamic volatility label
+    volDisplay.textContent = volLabel(parseFloat(volSlider.value));
+
+    // Re-apply signal count if we have data
+    if (lastSignals !== null) {
+        populateLedger(lastSignals);
+    }
+
+    // Rebuild chart with translated labels if it exists
+    if (lastChartData !== null) {
+        buildChart(lastChartData);
+    }
+
+    // Save preference
+    try { localStorage.setItem('cryptosim-lang', currentLang); } catch(e) {}
+}
+
+// ════════════════════════════════════════════════════════════════════
+// Bitcoin Trading Simulator - Client-Side Engine
+// ════════════════════════════════════════════════════════════════════
+
 function mulberry32(seed) {
     return function() {
         seed |= 0; seed = seed + 0x6D2B79F5 | 0;
-        let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+        var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
         t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
         return ((t ^ t >>> 14) >>> 0) / 4294967296;
     };
 }
 
-// Box-Muller transform: uniform -> normal distribution
 function normalRandom(rng, mean, stddev) {
-    const u1 = rng();
-    const u2 = rng();
-    const z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+    var u1 = rng();
+    var u2 = rng();
+    var z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
     return mean + stddev * z;
 }
 
-// ── Simulate Bitcoin prices (Geometric Brownian Motion) ────────────
 function simulateBitcoinPrices(days, startPrice, volatility, drift) {
     startPrice = startPrice || 60000;
     drift = drift || 0.0005;
-    const rng = mulberry32(1);
-    const prices = [];
-    let cumReturn = 0;
-    const startDate = new Date('2023-01-01');
+    var rng = mulberry32(1);
+    var prices = [];
+    var cumReturn = 0;
+    var startDate = new Date('2023-01-01');
 
-    for (let i = 0; i < days; i++) {
-        const dailyReturn = normalRandom(rng, drift, volatility);
+    for (var i = 0; i < days; i++) {
+        var dailyReturn = normalRandom(rng, drift, volatility);
         cumReturn += dailyReturn;
         prices.push({
             date: new Date(startDate.getTime() + i * 86400000).toISOString().slice(0, 10),
@@ -322,15 +449,14 @@ function simulateBitcoinPrices(days, startPrice, volatility, drift) {
     return prices;
 }
 
-// ── Calculate Simple Moving Averages ───────────────────────────────
 function calculateSMA(prices, window) {
-    const sma = [];
-    for (let i = 0; i < prices.length; i++) {
+    var sma = [];
+    for (var i = 0; i < prices.length; i++) {
         if (i < window - 1) {
             sma.push(null);
         } else {
-            let sum = 0;
-            for (let j = i - window + 1; j <= i; j++) {
+            var sum = 0;
+            for (var j = i - window + 1; j <= i; j++) {
                 sum += prices[j].price;
             }
             sma.push(sum / window);
@@ -339,82 +465,77 @@ function calculateSMA(prices, window) {
     return sma;
 }
 
-// ── Trading simulation with leverage ───────────────────────────────
 function simulateTrading(prices, sma7, sma30, initialBalance, leverage) {
-    let balance = initialBalance;
-    let btcHeld = 0;
-    let entryPrice = 0;
-    const ledger = [];
-    const signals = [];
+    var balance = initialBalance;
+    var btcHeld = 0;
+    var entryPrice = 0;
+    var ledger = [];
+    var signals = [];
 
-    for (let i = 0; i < prices.length; i++) {
-        const price = prices[i].price;
-        const date = prices[i].date;
-        const s7 = sma7[i];
-        const s30 = sma30[i];
+    for (var i = 0; i < prices.length; i++) {
+        var price = prices[i].price;
+        var date = prices[i].date;
+        var s7 = sma7[i];
+        var s30 = sma30[i];
 
         if (s7 === null || s30 === null) {
-            const totalValue = balance + btcHeld * price;
-            ledger.push({ date, price, sma7: s7, sma30: s30, action: 'Wait', balance, btcHeld, totalValue });
+            var totalValue = balance + btcHeld * price;
+            ledger.push({ date: date, price: price, sma7: s7, sma30: s30, action: 'Wait', balance: balance, btcHeld: btcHeld, totalValue: totalValue });
             continue;
         }
 
-        let action = 'Hold';
+        var action = 'Hold';
 
-        // Golden Cross Buy Signal: SMA7 crosses above SMA30
         if (s7 > s30 && btcHeld === 0) {
             btcHeld = (balance * leverage) / price;
             entryPrice = price;
             balance = 0;
             action = 'BUY';
         }
-        // Death Cross Sell Signal: SMA7 crosses below SMA30
         else if (s7 < s30 && btcHeld > 0) {
-            const rawValue = btcHeld * price;
-            const notional = btcHeld * entryPrice;
-            const pnl = rawValue - notional;
-            const equity = notional / leverage;
+            var rawValue = btcHeld * price;
+            var notional = btcHeld * entryPrice;
+            var pnl = rawValue - notional;
+            var equity = notional / leverage;
             balance = equity + pnl;
-            if (balance < 0) balance = 0; // liquidation
+            if (balance < 0) balance = 0;
             btcHeld = 0;
             entryPrice = 0;
             action = 'SELL';
         }
 
-        // Calculate portfolio value
-        let totalValue;
+        var totalValue;
         if (btcHeld > 0) {
-            const rawValue = btcHeld * price;
-            const notional = btcHeld * entryPrice;
-            const pnl = rawValue - notional;
-            const equity = notional / leverage;
+            var rawValue = btcHeld * price;
+            var notional = btcHeld * entryPrice;
+            var pnl = rawValue - notional;
+            var equity = notional / leverage;
             totalValue = equity + pnl;
             if (totalValue < 0) totalValue = 0;
         } else {
             totalValue = balance;
         }
 
-        ledger.push({ date, price, sma7: s7, sma30: s30, action, balance: Math.round(balance * 100) / 100, btcHeld, totalValue: Math.round(totalValue * 100) / 100 });
+        ledger.push({ date: date, price: price, sma7: s7, sma30: s30, action: action, balance: Math.round(balance * 100) / 100, btcHeld: btcHeld, totalValue: Math.round(totalValue * 100) / 100 });
 
         if (action === 'BUY' || action === 'SELL') {
             signals.push({ Date: date, Price: price, Action: action, Balance: Math.round(balance * 100) / 100, 'Total Value': Math.round(totalValue * 100) / 100 });
         }
     }
 
-    return { ledger, signals };
+    return { ledger: ledger, signals: signals };
 }
 
-// ── Main simulation entry point ────────────────────────────────────
 function runSimulation(days, volatility, leverage) {
-    const initialBalance = 10000;
-    const prices = simulateBitcoinPrices(days, 60000, volatility, 0.0005);
-    const sma7 = calculateSMA(prices, 7);
-    const sma30 = calculateSMA(prices, 30);
-    const { ledger, signals } = simulateTrading(prices, sma7, sma30, initialBalance, leverage);
+    var initialBalance = 10000;
+    var prices = simulateBitcoinPrices(days, 60000, volatility, 0.0005);
+    var sma7 = calculateSMA(prices, 7);
+    var sma30 = calculateSMA(prices, 30);
+    var result = simulateTrading(prices, sma7, sma30, initialBalance, leverage);
 
-    const finalValue = ledger[ledger.length - 1].totalValue;
-    const profit = finalValue - initialBalance;
-    const roi = initialBalance > 0 ? (profit / initialBalance) * 100 : 0;
+    var finalValue = result.ledger[result.ledger.length - 1].totalValue;
+    var profit = finalValue - initialBalance;
+    var roi = initialBalance > 0 ? (profit / initialBalance) * 100 : 0;
 
     return {
         summary: {
@@ -422,15 +543,15 @@ function runSimulation(days, volatility, leverage) {
             final_value: Math.round(finalValue * 100) / 100,
             profit: Math.round(profit * 100) / 100,
             roi: Math.round(roi * 100) / 100,
-            leverage, days, volatility,
+            leverage: leverage, days: days, volatility: volatility,
         },
         chart_data: {
-            dates: ledger.map(r => r.date),
-            prices: ledger.map(r => Math.round(r.price * 100) / 100),
-            sma7: ledger.map(r => r.sma7 !== null ? Math.round(r.sma7 * 100) / 100 : null),
-            sma30: ledger.map(r => r.sma30 !== null ? Math.round(r.sma30 * 100) / 100 : null),
+            dates: result.ledger.map(function(r) { return r.date; }),
+            prices: result.ledger.map(function(r) { return Math.round(r.price * 100) / 100; }),
+            sma7: result.ledger.map(function(r) { return r.sma7 !== null ? Math.round(r.sma7 * 100) / 100 : null; }),
+            sma30: result.ledger.map(function(r) { return r.sma30 !== null ? Math.round(r.sma30 * 100) / 100 : null; }),
         },
-        signals,
+        signals: result.signals,
     };
 }
 
@@ -438,33 +559,31 @@ function runSimulation(days, volatility, leverage) {
 // UI Controller
 // ════════════════════════════════════════════════════════════════════
 
-// ── State ──────────────────────────────────────────────────────────
-let selectedDays = 90;
-let priceChart = null;
+var selectedDays = 90;
+var priceChart = null;
+var lastSignals = null;
+var lastChartData = null;
 
-// ── DOM refs ───────────────────────────────────────────────────────
-const leverageSlider  = document.getElementById('leverage-slider');
-const leverageDisplay = document.getElementById('leverage-display');
-const volSlider       = document.getElementById('volatility-slider');
-const volDisplay      = document.getElementById('volatility-display');
-const runBtn          = document.getElementById('run-btn');
-const yieldDisplay    = document.getElementById('yield-display');
-const yieldArrow      = document.getElementById('yield-arrow');
-const portfolioDisp   = document.getElementById('portfolio-display');
-const ledgerBody      = document.getElementById('ledger-body');
-const signalCount     = document.getElementById('signal-count');
+var leverageSlider  = document.getElementById('leverage-slider');
+var leverageDisplay = document.getElementById('leverage-display');
+var volSlider       = document.getElementById('volatility-slider');
+var volDisplay      = document.getElementById('volatility-display');
+var runBtn          = document.getElementById('run-btn');
+var yieldDisplay    = document.getElementById('yield-display');
+var yieldArrow      = document.getElementById('yield-arrow');
+var portfolioDisp   = document.getElementById('portfolio-display');
+var ledgerBody      = document.getElementById('ledger-body');
+var signalCount     = document.getElementById('signal-count');
 
-// ── Volatility labels ──────────────────────────────────────────────
 function volLabel(pct) {
-    if (pct <= 2)  return 'Very Low';
-    if (pct <= 4)  return 'Low';
-    if (pct <= 6)  return 'Medium';
-    if (pct <= 10) return 'Medium High';
-    if (pct <= 15) return 'High';
-    return 'Extreme';
+    if (pct <= 2)  return t('vol_very_low');
+    if (pct <= 4)  return t('vol_low');
+    if (pct <= 6)  return t('vol_medium');
+    if (pct <= 10) return t('vol_medium_high');
+    if (pct <= 15) return t('vol_high');
+    return t('vol_extreme');
 }
 
-// ── Slider live updates ────────────────────────────────────────────
 leverageSlider.addEventListener('input', function() {
     leverageDisplay.textContent = parseFloat(leverageSlider.value).toFixed(1) + 'x';
 });
@@ -472,10 +591,9 @@ volSlider.addEventListener('input', function() {
     volDisplay.textContent = volLabel(parseFloat(volSlider.value));
 });
 
-// ── Lookback period toggle ─────────────────────────────────────────
-const daysBtns = document.querySelectorAll('.days-btn');
-const activeClasses  = ['bg-primary-container/20','text-[#F7931A]','active-glow','border','border-[#F7931A]/20','scale-[0.98]','shadow-inner'];
-const defaultClasses = ['bg-surface-container-lowest','text-zinc-500'];
+var daysBtns = document.querySelectorAll('.days-btn');
+var activeClasses  = ['bg-primary-container/20','text-[#F7931A]','active-glow','border','border-[#F7931A]/20','scale-[0.98]','shadow-inner'];
+var defaultClasses = ['bg-surface-container-lowest','text-zinc-500'];
 
 daysBtns.forEach(function(btn) {
     btn.addEventListener('click', function() {
@@ -489,9 +607,8 @@ daysBtns.forEach(function(btn) {
     });
 });
 
-// ── Chart.js setup ─────────────────────────────────────────────────
 function buildChart(chartData) {
-    const ctx = document.getElementById('price-chart').getContext('2d');
+    var ctx = document.getElementById('price-chart').getContext('2d');
 
     if (priceChart) {
         priceChart.destroy();
@@ -503,7 +620,7 @@ function buildChart(chartData) {
             labels: chartData.dates,
             datasets: [
                 {
-                    label: 'Price',
+                    label: currentLang === 'ar' ? '\u0627\u0644\u0633\u0639\u0631' : 'Price',
                     data: chartData.prices,
                     borderColor: '#e5e1e4',
                     backgroundColor: 'rgba(229,225,228,0.05)',
@@ -513,7 +630,7 @@ function buildChart(chartData) {
                     fill: true,
                 },
                 {
-                    label: 'SMA 7',
+                    label: currentLang === 'ar' ? '\u0645\u062A\u0648\u0633\u0637 7' : 'SMA 7',
                     data: chartData.sma7,
                     borderColor: '#F7931A',
                     borderWidth: 2,
@@ -523,7 +640,7 @@ function buildChart(chartData) {
                     spanGaps: true,
                 },
                 {
-                    label: 'SMA 30',
+                    label: currentLang === 'ar' ? '\u0645\u062A\u0648\u0633\u0637 30' : 'SMA 30',
                     data: chartData.sma30,
                     borderColor: '#ffb874',
                     borderWidth: 2,
@@ -542,9 +659,10 @@ function buildChart(chartData) {
                 legend: {
                     display: true,
                     position: 'top',
+                    rtl: currentLang === 'ar',
                     labels: {
                         color: '#dbc2ae',
-                        font: { family: 'Manrope', size: 10, weight: '600' },
+                        font: { family: 'Manrope, Noto Kufi Arabic', size: 10, weight: '600' },
                         boxWidth: 12,
                         padding: 12,
                         usePointStyle: true,
@@ -556,8 +674,9 @@ function buildChart(chartData) {
                     bodyColor: '#e5e1e4',
                     borderColor: 'rgba(247,147,26,0.2)',
                     borderWidth: 1,
-                    titleFont: { family: 'Manrope', weight: '700' },
-                    bodyFont: { family: 'Manrope' },
+                    rtl: currentLang === 'ar',
+                    titleFont: { family: 'Manrope, Noto Kufi Arabic', weight: '700' },
+                    bodyFont: { family: 'Manrope, Noto Kufi Arabic' },
                     callbacks: {
                         label: function(ctx) {
                             if (ctx.parsed.y === null) return ctx.dataset.label + ': N/A';
@@ -579,6 +698,7 @@ function buildChart(chartData) {
                 },
                 y: {
                     display: true,
+                    position: currentLang === 'ar' ? 'right' : 'left',
                     ticks: {
                         color: '#554335',
                         font: { family: 'Manrope', size: 9 },
@@ -591,24 +711,24 @@ function buildChart(chartData) {
     });
 }
 
-// ── Populate ledger table ──────────────────────────────────────────
 function populateLedger(signals) {
+    lastSignals = signals;
+
     if (!signals || signals.length === 0) {
-        ledgerBody.innerHTML = '<tr><td colspan="3" class="p-6 text-center text-zinc-500 text-sm">No BUY/SELL signals in this period</td></tr>';
-        signalCount.textContent = '0 Signals';
+        ledgerBody.innerHTML = '<tr><td colspan="3" class="p-6 text-center text-zinc-500 text-sm">' + t('no_signals') + '</td></tr>';
+        signalCount.textContent = t('signals_count')(0);
         return;
     }
 
-    signalCount.textContent = signals.length + ' Signal' + (signals.length !== 1 ? 's' : '');
+    signalCount.textContent = t('signals_count')(signals.length);
 
-    // Show most recent first
     var reversed = signals.slice().reverse();
     ledgerBody.innerHTML = reversed.map(function(s, i) {
         var isBuy = s.Action === 'BUY';
         var bgClass = i % 2 === 1 ? ' bg-surface-container-low/30' : '';
         var badgeBg = isBuy ? 'bg-emerald-500/10' : 'bg-error/10';
         var badgeText = isBuy ? 'text-emerald-500' : 'text-error';
-        var label = isBuy ? 'Long' : 'Short';
+        var label = isBuy ? t('long') : t('short');
         var price = '$' + s.Price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
         return '<tr class="hover:bg-primary-container/5 transition-colors' + bgClass + '">' +
             '<td class="p-4">' +
@@ -620,7 +740,6 @@ function populateLedger(signals) {
     }).join('');
 }
 
-// ── Update stats ───────────────────────────────────────────────────
 function updateStats(summary) {
     var roi = summary.roi;
     var sign = roi >= 0 ? '+' : '';
@@ -633,21 +752,19 @@ function updateStats(summary) {
     portfolioDisp.textContent = '$' + summary.final_value.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
 }
 
-// ── Run simulation (client-side) ───────────────────────────────────
 function handleRunSimulation() {
     var leverage   = parseFloat(leverageSlider.value);
-    var volatility = parseFloat(volSlider.value) / 100; // convert % to decimal
+    var volatility = parseFloat(volSlider.value) / 100;
     var days       = selectedDays;
 
-    // Brief visual feedback
     runBtn.disabled = true;
     var originalHTML = runBtn.innerHTML;
-    runBtn.innerHTML = '<span class="material-symbols-outlined animate-spin" style="font-variation-settings: \'FILL\' 1;">progress_activity</span> Simulating...';
+    runBtn.innerHTML = '<span class="material-symbols-outlined animate-spin" style="font-variation-settings: \'FILL\' 1;">progress_activity</span> ' + t('simulating');
 
-    // Use setTimeout to allow the UI to repaint before heavy computation
     setTimeout(function() {
         try {
             var data = runSimulation(days, volatility, leverage);
+            lastChartData = data.chart_data;
             updateStats(data.summary);
             buildChart(data.chart_data);
             populateLedger(data.signals);
@@ -664,5 +781,18 @@ function handleRunSimulation() {
 }
 
 runBtn.addEventListener('click', handleRunSimulation);
+
+// Language toggle button
+document.getElementById('lang-btn').addEventListener('click', toggleLanguage);
+
+// Restore saved language preference
+(function() {
+    try {
+        var saved = localStorage.getItem('cryptosim-lang');
+        if (saved === 'ar') {
+            toggleLanguage();
+        }
+    } catch(e) {}
+})();
 </script>
 </body></html>
